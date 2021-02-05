@@ -8,4 +8,4 @@ services:
     volumes:
       - ./conf:/etc/nginx/conf.d
       - ./logs:/var/log/nginx
-
+    restart: unless-stopped

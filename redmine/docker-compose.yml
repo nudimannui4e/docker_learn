@@ -1,25 +1,33 @@
 version: '3'
-
+# Подключаемые папки, если их нет
+# создаются на-лету
 volumes:
   pg_data:
   redmine_plugins:
   redmine_themes:
   redmine_data:
   redmine_conf:
-  
+
+# Контейнеры          
 services:
 
   redmine:
+    # alpine - минимально-возможная среда      
     image: redmine:4.1.1-alpine
     volumes:
+            # Можно закинуть плагины, темы
+            # Files - для файлов, что выгружают в сам Redmine
             - ./redmine_plugins:/usr/src/redmine/plugins
             - ./redmine_themes:/usr/src/redmine/public/themes
             - ./redmine_data:/usr/src/redmine/files
-         
+    
+    # Проброс порта
+    # 8083 - проксирует на 80 nginx (отдельный контейнер)     
     ports:
       - 8083:3000
 
     environment:
+      # Сменить на свое
       REDMINE_DB_POSTGRES: "postgres"
       REDMINE_DB_USERNAME: "postgres"
       REDMINE_DB_PASSWORD: "redmine"
@@ -33,9 +41,11 @@ services:
   postgres:
     image: postgres:10
     volumes:
+      # тут по сути все настройки, БД и т.д.
       - ./pg_data:/var/lib/postgresql/data
 
     environment:
+      # Сменить на свое      
       POSTGRES_PASSWORD: "redmine"
       POSTGRES_DB: "redmine"
       PGDATA: "/var/lib/postgresql/data"

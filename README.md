@@ -1,4 +1,4 @@
-#Описание:
+# Описание:
   - Изучение docker, docker-compose
   - По сути, сюда буду кидать рабочие конфиги
 
@@ -12,6 +12,9 @@
   
   # войти в bash-shell контейнера
   $ docker exec it $NAME bash
+
+  # Удаление контейнеров со статусом 
+  $ docker rm $(docker ps -a -q -f status=exited)
   ```
 
 

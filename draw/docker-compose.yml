@@ -1,0 +1,9 @@
+#docker run -it --rm --name="draw" -p 8080:8080 -p 8443:8443 jgraph/drawio
+version: '3'
+services:
+  draw.io:
+    image: ryangoh/drawio 
+    container_name: draw_deshko
+    restart: always
+    ports:
+      - 9090:8080

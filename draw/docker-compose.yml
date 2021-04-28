@@ -3,7 +3,7 @@ version: '3'
 services:
   draw.io:
     image: ryangoh/drawio 
-    container_name: draw_deshko
+    container_name: { container_name }
     restart: always
     ports:
       - 9090:8080
